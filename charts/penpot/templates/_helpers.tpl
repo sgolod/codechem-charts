@@ -70,3 +70,17 @@ Create the name of the service account to use.
     {{ default "default" .Values.serviceAccount.name }}
 {{- end -}}
 {{- end -}}
+
+{{/*
+Create the name and port of the backend service.
+*/}}
+{{- define "penpot.backend.uri" -}}
+{{ printf "http://%s-%s:%v" (include "penpot.fullname" .) "backend" .Values.backend.service.port }}
+{{- end -}}
+
+{{/*
+Create the name and port of the exporter service.
+*/}}
+{{- define "penpot.exporter.uri" -}}
+{{ printf "http://%s-%s:%v" (include "penpot.fullname" .) "exporter" .Values.exporter.service.port }}
+{{- end -}}
